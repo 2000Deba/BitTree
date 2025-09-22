@@ -2,12 +2,11 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import clientPromise from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
+import dbConnect from "@/lib/mongoose";
+import User from "@/models/User";
 
 export const authOptions = {
-  adapter: MongoDBAdapter(clientPromise),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -16,16 +15,19 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const client = await clientPromise;
-        const db = client.db("bittree");
-        const user = await db.collection("users").findOne({ email: credentials.email });
+        await dbConnect();
+        const user = await User.findOne({ email: credentials.email });
         if (!user) return null;
 
         const valid = await bcrypt.compare(credentials.password, user.password);
         if (!valid) return null;
 
-        // NextAuth expects at least { id, name, email }
-        return { id: user._id.toString(), name: user.name, email: user.email, handle: user.handle };
+        return {
+          id: user._id.toString(),
+          name: user.name,
+          email: user.email,
+          handle: user.handle,
+        };
       },
     }),
     GoogleProvider({
@@ -38,48 +40,63 @@ export const authOptions = {
     }),
   ],
   pages: {
-    signIn: "/login", // custom login page
+    signIn: "/login",
   },
   session: {
     strategy: "jwt",
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      await dbConnect();
+      let existing = await User.findOne({ email: user.email });
+
+      if (!existing) {
+        existing = await User.create({
+          name: user.name,
+          email: user.email,
+          image: user.image,
+        });
+      }
+
+      return true;
+    },
     async jwt({ token, user }) {
-      // when user logs in (first time) user object is available
+      await dbConnect();
+
       if (user) {
+        token.id = user.id;
         token.handle = user.handle ?? token.handle;
       }
 
-      // if token doesn't have handle but we have email, try to load from DB
-      if (!token.handle && token.email) {
-        const client = await clientPromise;
-        const db = client.db("bittree");
-        const u = await db.collection("users").findOne({ email: token.email });
+      if (token.email && !token.handle) {
+        const u = await User.findOne({ email: token.email });
+
         if (u) {
-          // if handle missing for social users, generate one and save
           if (!u.handle) {
-            const base = (u.name || token.email.split("@")[0]).toLowerCase()
+            const base = (u.name || token.email.split("@")[0])
+              .toLowerCase()
               .replace(/[^a-z0-9\-]/g, "-")
               .replace(/-+/g, "-")
               .replace(/(^-|-$)/g, "");
             let handle = base || "user";
             let i = 0;
-            // ensure uniqueness
-            while (await db.collection("users").findOne({ handle })) {
+            while (await User.findOne({ handle })) {
               i++;
               handle = `${base}${i}`;
             }
-            await db.collection("users").updateOne({ _id: u._id }, { $set: { handle } });
+            u.handle = handle;
+            await u.save();
             token.handle = handle;
           } else {
             token.handle = u.handle;
           }
         }
       }
+
       return token;
     },
     async session({ session, token }) {
-      session.user = session.user || {};
+      session.user.id = token.id;
       session.user.handle = token.handle || null;
       return session;
     },

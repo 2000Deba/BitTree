@@ -35,17 +35,16 @@ export default function RegisterPage() {
   return (
     <>
       <ToastContainer />
-      <div className="min-h-screen pt-28 flex justify-center items-center bg-[#f5e8f7]">
-        <div className="bg-white p-10 rounded-xl shadow-lg w-[400px]">
-          <h1 className="text-2xl font-bold text-center mb-6">Create Account</h1>
+      <div className="min-h-screen pt-24 sm:pt-28 flex justify-center items-center bg-[#f5e8f7] px-4">
+        <div className="bg-white p-6 sm:p-10 rounded-xl shadow-lg w-full max-w-md">
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Create Account</h1>
           <form className="flex flex-col gap-4" onSubmit={handleRegister}>
-            <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500" />
-            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500" />
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500" />
-
-            <button type="submit" className="bg-slate-900 text-white py-2 rounded-lg font-semibold hover:bg-slate-700 transition">Register</button>
+            <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500 w-full" />
+            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500 w-full" />
+            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500 w-full" />
+            <button type="submit" className="bg-slate-900 text-white py-2 rounded-lg font-semibold hover:bg-slate-700 transition w-full">Register</button>
           </form>
-          <p className="text-center mt-4 text-gray-600">
+          <p className="text-center mt-4 text-gray-600 text-sm sm:text-base">
             Already have an account?{" "}
             <a href="/login" className="text-pink-600 font-semibold">
               Login
@@ -53,6 +52,7 @@ export default function RegisterPage() {
           </p>
         </div>
       </div>
+
     </>
   )
 }

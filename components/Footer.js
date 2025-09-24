@@ -103,8 +103,8 @@ export default function FooterSection() {
                 <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 flex-wrap">
                     {/* Left Buttons */}
                     <div className="flex gap-3 flex-wrap justify-center sm:justify-start">
-                        <button className="px-5 py-2 rounded-md bg-gray-100 hover:bg-gray-200 text-sm">Log in</button>
-                        <button className="px-5 py-2 rounded-md bg-[#d2e823] hover:bg-[#c2d721] text-sm font-medium text-[#1e2330]">Get started for free</button>
+                        <Link href={"/login"}><button className="px-5 py-2 rounded-md bg-gray-100 hover:bg-gray-200 text-sm">Log in</button></Link>
+                        <Link href={"/register"}><button className="px-5 py-2 rounded-md bg-[#d2e823] hover:bg-[#c2d721] text-sm font-medium text-[#1e2330]">Get started for free</button></Link>
                     </div>
 
                     {/* App Store Buttons */}
@@ -115,12 +115,12 @@ export default function FooterSection() {
 
                     {/* Social Icons */}
                     <div className="flex gap-3 justify-center sm:justify-end flex-wrap text-white">
-                        <Link href="/"><div className="bg-[#1e2330] rounded-full p-3"><FaInstagram size={25} /></div></Link>
-                        <Link href="/"><div className="bg-[#1e2330] rounded-full p-3"><FaTiktok size={25} /></div></Link>
-                        <Link href="/"><div className="bg-[#1e2330] rounded-full p-3"><FaYoutube size={25} /></div></Link>
-                        <Link href="/"><div className="bg-[#1e2330] rounded-full p-3"><FaThreads size={25} /></div></Link>
-                        <Link href="/"><div className="bg-[#1e2330] rounded-full p-3"><FaTwitter size={25} /></div></Link>
-                        <Link href="/"><div className="bg-[#1e2330] rounded-full p-3"><FaFacebook size={25} /></div></Link>
+                        <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaInstagram size={25} /></div></Link>
+                        <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaTiktok size={25} /></div></Link>
+                        <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaYoutube size={25} /></div></Link>
+                        <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaThreads size={25} /></div></Link>
+                        <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaTwitter size={25} /></div></Link>
+                        <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaFacebook size={25} /></div></Link>
                     </div>
                 </div>
             </div>

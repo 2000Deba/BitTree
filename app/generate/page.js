@@ -15,7 +15,7 @@ const Generate = () => {
   const [isHandleEdited, setIsHandleEdited] = useState(false)
   const [pic, setPic] = useState("")
   const [desc, setDesc] = useState("")
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false) // prevent reset issue
 
   // Initial handle setup
   useEffect(() => {
@@ -48,12 +48,11 @@ const Generate = () => {
     // sanitize handle before saving
     const cleanHandle = handle
       .trim()
-      // .toLowerCase()
       .replace(/\s+/g, "-") // space → dash
       .replace(/[^a-zA-Z0-9-_]/g, "") // remove invalid chars
 
     const payload = {
-      email: session.user.email,
+      email: session.user.email, // Will always be updated via email.
       links,
       handle: cleanHandle,
       pic,
@@ -62,7 +61,7 @@ const Generate = () => {
 
     try {
       let res
-      const isEditing = searchParams.get("handle")
+      const isEditing = searchParams.get("handle") // There is an old handle, which means edit mode.
 
       if (isEditing) {
         // update existing (by email)
@@ -108,7 +107,7 @@ const Generate = () => {
               setPic(data.result.pic || "")
               setDesc(data.result.desc || "")
               setHandle(data.result.handle || "")
-              setIsLoaded(true)
+              setIsLoaded(true) // It will not reset from now on.
             }
           }
         } catch (err) {

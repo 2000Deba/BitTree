@@ -24,12 +24,12 @@ export async function GET(req, { params }) {
     );
   }
 
-  // Now bring up his BitTree document.
+  // Now bring his BitTree document.
   const tree = await BitTree.findOne({ ownerEmail: email })
     .select("handle links pic desc createdAt")
     .lean();
 
-  // 🔑 handle preference: user.handle → tree.handle → null
+  // handle preference: user.handle → tree.handle → null
   const finalHandle = user.handle || tree?.handle || null;
 
   // If user.handle is empty but exists in BitTree, then update the user collection as well.

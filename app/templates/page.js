@@ -6,66 +6,92 @@ export default function TemplatesPage() {
     const [query, setQuery] = useState("");
     const [selected, setSelected] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    const handleUseTemplate = async (t) => {
-        try {
-            const res = await fetch("/api/template", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    template: t.thumb,
-                }),
-            });
-            if (res.ok) {
-                alert("Template applied successfully!");
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    };
 
     const templates = useMemo(() => [
         {
             id: "t1",
             title: "Business Card",
             desc: "Information-based, for displaying business identity.",
-            thumb: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=60",
+            thumb: "/t1-template.jpeg",
             tags: ["business", "info"]
         },
         {
             id: "t2",
             title: "Showcase",
             desc: "Perfect for highlighting work and portfolios.",
-            thumb: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=60",
+            thumb: "/t2-template.png",
             tags: ["portfolio", "creative"]
         },
         {
             id: "t3",
             title: "Minimal Clean",
             desc: "Very simple, fast loading — great for personal link pages.",
-            thumb: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=1200&q=60",
+            thumb: "/t3-template.png",
             tags: ["minimal", "personal"]
         },
         {
             id: "t4",
             title: "Streamer",
             desc: "To show links and social feeds together.",
-            thumb: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=60",
+            thumb: "/t4-template.jpeg",
             tags: ["stream", "social"]
         },
         {
             id: "t5",
             title: "Music Artist",
             desc: "To display the music player and release link.",
-            thumb: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200&q=60",
+            thumb: "/t5-template.jpg",
             tags: ["music", "artist"]
         },
         {
             id: "t6",
             title: "Events",
             desc: "For event listings, RSVP buttons, ticket links.",
-            thumb: "https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee?w=1200&q=60",
+            thumb: "/t6-template.jpeg",
             tags: ["events", "tickets"]
-        }
+        },
+        {
+            id: "t7",
+            title: "Singers",
+            desc: "To display your vibes as a musical persons.",
+            thumb: "/t7-template.jpg",
+            tags: ["songs", "tones"]
+        },
+        {
+            id: "t8",
+            title: "Balcombe",
+            desc: "For those who loves the beautiful sky.",
+            thumb: "/t8-template.png",
+            tags: ["sky", "naturals"]
+        },
+        {
+            id: "t9",
+            title: "Constance",
+            desc: "Specially for working professionals to listing their skills.",
+            thumb: "/t9-template.jpg",
+            tags: ["portfolio", "showcase"]
+        },
+        {
+            id: "t10",
+            title: "Artimis",
+            desc: "For listings all of your personal social links together.",
+            thumb: "/t10-template.jpeg",
+            tags: ["social", "personal"]
+        },
+        {
+            id: "t11",
+            title: "Rainbow",
+            desc: "For highlighting unique and attractive profile for sharing.",
+            thumb: "/t11-template.jpeg",
+            tags: ["rainbow", "sky"]
+        },
+        {
+            id: "t12",
+            title: "Roses",
+            desc: "For those who loves to presenting their profile beautifully.",
+            thumb: "/t12-template.jpg",
+            tags: ["flowers", "natures"]
+        },
     ], []);
 
     const filtered = templates.filter(t => {
@@ -88,18 +114,60 @@ export default function TemplatesPage() {
         setSelected(null);
     }
 
-    function handleDownload(t) {   
-        const data = {
-            title: t.title,
-            desc: t.desc
-        };
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${t.id}-template.json`;
-        a.click();
-        URL.revokeObjectURL(url);
+    const handleUseTemplate = async (t) => {
+        try {
+            const res = await fetch("/api/template", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    template: t.thumb,   // Card image URL sent.
+                }),
+            });
+            if (res.ok) {
+                alert("Template applied successfully!");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleResetTemplate = async () => {
+        try {
+            const res = await fetch("/api/template", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ template: "" }),  // reset default
+            });
+            if (res.ok) {
+                alert("Template reset to default!");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    async function handleDownload(t) {
+        try {
+            // Creating a blob by fetching an image
+            const res = await fetch(t.thumb);
+            const blob = await res.blob();
+
+            // Download link created
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+
+            // filename auto will be template id + extension
+            const ext = blob.type.split("/")[1] || "png";
+            a.download = `${t.id}-template.${ext}`;
+
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } catch (err) {
+            console.error("Download failed:", err);
+        }
     }
 
     return (
@@ -122,7 +190,8 @@ export default function TemplatesPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
                             </svg>
                         </div>
-                        <button onClick={() => { setQuery(""); }} className="px-3 py-2 bg-white border border-gray-200 rounded-md shadow-sm text-sm">Reset</button>
+                        <button onClick={() => { setQuery(""); }} className="px-3 py-2 bg-white border border-gray-200 rounded-md shadow-sm text-sm">Reset Search</button>
+                        <button onClick={handleResetTemplate} className="px-3 py-2 bg-red-500 text-white rounded-md shadow-sm text-sm">Reset Default Template</button>
                     </div>
                 </header>
 
@@ -207,7 +276,7 @@ export default function TemplatesPage() {
 
                                     <div className="mt-6 flex flex-wrap gap-3">
                                         <button onClick={() => handleUseTemplate(selected)} className="px-3 sm:px-4 py-2 bg-indigo-600 text-white rounded-md text-sm">Use this template</button>
-                                        <button onClick={() => handleDownload(selected)} className="px-3 sm:px-4 py-2 border rounded-md text-sm">Download JSON</button>
+                                        <button onClick={() => handleDownload(selected)} className="px-3 sm:px-4 py-2 border rounded-md text-sm">Download this template</button>
                                     </div>
                                 </div>
                             </div>

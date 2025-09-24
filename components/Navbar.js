@@ -73,7 +73,7 @@ export default function Navbar() {
   return (
     <>
       {showNavbar && (
-        <nav className={`bg-white w-[85vw] flex justify-between items-center fixed right-[7.5vw] rounded-full py-4 px-8 shadow-md z-50 transition-all duration-1000 ease-in-out ${visible ? "top-8" : "-top-28"}`}>
+        <nav className={`bg-white w-[85vw] flex justify-between items-center fixed right-[7.5vw] py-4 px-8 shadow-md z-50 transition-all duration-1000 ease-in-out ${visible ? "top-8" : "-top-28"} ${isOpen ? "rounded-t-full" : "rounded-full"}`}>
           {/* Logo */}
           <Link href="/" className="text-2xl font-bold flex items-center gap-2 select-none">
             <span>BitTree</span>

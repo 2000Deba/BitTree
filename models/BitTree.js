@@ -22,6 +22,7 @@ const BitTreeSchema = new mongoose.Schema(
         link: { type: String },
       },
     ],
+    template: { type: String, default: "" },
     pic: { type: String, default: "" },
     desc: { type: String, default: "" },
     ownerEmail: { type: String, required: true }, // root identifier

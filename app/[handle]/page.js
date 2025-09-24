@@ -39,7 +39,11 @@ export default async function Page({ params }) {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#ab289e] via-[#188c90] to-[#b75d18] p-4 sm:p-8 flex items-center justify-center">
-      <div className="max-w-3xl w-full bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-6 sm:p-8 border border-white/20">
+      <div className="max-w-3xl w-full bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-6 sm:p-8 border border-white/20" style={{
+        backgroundImage: `url(${bit.template || ""})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}>
 
         {/* Profile Section */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
@@ -48,7 +52,7 @@ export default async function Page({ params }) {
           <div className="text-center sm:text-left">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{bit.handle}</h1>
             {bit.desc && <p className="text-sm sm:text-base text-gray-700 mt-1">{bit.desc}</p>}
-            <p className="text-xs sm:text-sm text-gray-500 mt-1">
+            <p className="text-xs sm:text-sm text-gray-600 mt-1">
               Created: {new Date(bit.createdAt).toLocaleString()}
             </p>
             {isOwner && (

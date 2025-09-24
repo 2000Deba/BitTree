@@ -63,6 +63,7 @@ export async function POST(request) {
     existing.links = body.links || existing.links;
     existing.pic = body.pic || existing.pic;
     existing.desc = body.desc || existing.desc;
+    existing.template = body.template || existing.template;
     await existing.save();
     doc = existing;
   } else {
@@ -72,6 +73,7 @@ export async function POST(request) {
       handle: newHandle,
       pic: body.pic || "",
       desc: body.desc || "",
+      template: body.template || "",
       ownerEmail: session.user.email,
       ownerId:
         session.user.id ||

@@ -47,8 +47,9 @@ export default function RegisterPage() {
           </form>
           <p className="text-center mt-4 text-gray-600 text-sm sm:text-base">
             Already have an account?{" "}
-            <Link href="/login" className="text-pink-600 font-semibold">
+            <Link><a href="/login" className="text-pink-600 font-semibold">
               Login
+            </a>
             </Link>
           </p>
         </div>

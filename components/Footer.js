@@ -47,7 +47,7 @@ export default function FooterSection() {
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">The Linktree Blog</li></Link>
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">Engineering Blog</li></Link>
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">Marketplace</li></Link>
-                            <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">What's New</li></Link>
+                            <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">What&apos;s New</li></Link>
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">About</li></Link>
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">Press</li></Link>
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">Careers</li></Link>
@@ -65,7 +65,7 @@ export default function FooterSection() {
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">2023 Creator Report</li></Link>
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">2022 Creator Report</li></Link>
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">Charttiles</li></Link>
-                            <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">What's Trending</li></Link>
+                            <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">What&apos;s Trending</li></Link>
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">Creator Profile Directory</li></Link>
                             <Link href="/"><li className="py-1 sm:py-2 cursor-pointer hover:text-[#502274] transition-colors">Explore Templates</li></Link>
                         </ul>

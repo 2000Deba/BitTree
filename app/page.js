@@ -87,7 +87,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="bg-[#254f1a] min-h-screen grid grid-cols-1 md:grid-cols-2 sm:py-[16vw] pt-[30vw] pb-[16vw] px-6 md:px-[8vw] gap-10">
+      <section className="bg-[#254f1a] grid grid-cols-1 md:grid-cols-2 sm:py-[16vw] pt-[45vw] pb-[16vw] px-6 md:px-[8vw] gap-10">
         {/* Left side text */}
         <div className="flex flex-col justify-center gap-4 text-center md:text-left">
           <div className="text-start">
@@ -115,7 +115,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#e9c0e9] min-h-[100vh] grid grid-cols-1 md:grid-cols-2 py-[11vw] px-6 md:px-[8vw] gap-8">
+      <section className="bg-[#e9c0e9] grid grid-cols-1 md:grid-cols-2 py-[11vw] px-6 md:px-[8vw] gap-8">
         {/* Left side image */}
         <div className="flex justify-center items-center">
           <img src="/home-2.png" alt="homepage image" className="max-w-full h-auto" />
@@ -139,7 +139,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#780016] min-h-[100vh] grid grid-cols-1 md:grid-cols-2 py-[11vw] px-6 md:px-[8vw] gap-8">
+      <section className="bg-[#780016] grid grid-cols-1 md:grid-cols-2 py-[11vw] px-6 md:px-[8vw] gap-8">
         {/* Left side text */}
         <div className="flex justify-center flex-col gap-4 text-center md:text-left order-2 md:order-1">
           <div className="text-start">
@@ -164,7 +164,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#e8efd6] min-h-[100vh] grid grid-cols-1 md:grid-cols-2 py-[11vw] px-6 md:px-[8vw] gap-8">
+      <section className="bg-[#e8efd6] grid grid-cols-1 md:grid-cols-2 py-[11vw] px-6 md:px-[8vw] gap-8">
         {/* Left side image */}
         <div className="flex justify-center items-center order-1 md:order-1">
           <img src="/home-4.avif" alt="homepage image" className="max-w-full h-auto" />
@@ -189,7 +189,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#f3f3f1] min-h-[100vh] py-[4vw] px-0">
+      <section className="bg-[#f3f3f1] py-[4vw] md:pb-[8vw] px-0">
         {/* Text */}
         <div className="flex flex-col justify-center items-center mb-10 text-center px-6 md:px-[8vw] max-w-7xl mx-auto">
           <p className="text-[#1e2330] font-extrabold text-[6vw] sm:text-[5vw] md:text-[4vw] lg:text-[3vw] leading-tight">
@@ -240,7 +240,7 @@ export default function Home() {
         </style>
       </section>
 
-      <section className="bg-[#f3f3f1] min-h-[100vh] grid grid-cols-1 md:grid-cols-2 gap-4 px-[8vw] py-10">
+      <section className="bg-[#f3f3f1] grid grid-cols-1 md:grid-cols-2 gap-4 px-[8vw] py-10">
         {/* Left side */}
         <div className="grid grid-rows-2 gap-4">
           <div className="flex flex-col gap-8 bg-[#e9c0e9] py-8 rounded-3xl">
@@ -266,14 +266,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#f3f3f1] min-h-[60vh] grid grid-rows-2 py-[11vw] gap-8 px-6 md:px-[8vw]">
+      <section className="bg-[#f3f3f1] flex flex-col py-[11vw] gap-8 px-6 md:px-[8vw]">
         {/* Text Section */}
         <div className="flex flex-col justify-center items-center text-center">
           <p className="text-[#1e2330] font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-4xl leading-snug">
-            The fast, friendly and
-          </p>
-          <p className="text-[#1e2330] font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-4xl leading-snug">
-            powerful link in bio tool.
+            The fast, friendly and powerful link in bio tool.
           </p>
         </div>
 
@@ -283,7 +280,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#f3f3f1] min-h-[100vh] flex flex-col items-center justify-center space-y-20 px-6 md:px-[8vw] pb-[11vw]">
+      <section className="bg-[#f3f3f1] flex flex-col items-center justify-center space-y-20 px-6 md:px-[8vw] pt-[5vw] pb-[11vw]">
         {/* Featured logos */}
         <div className="flex flex-col justify-center items-center gap-10 w-full">
           <p className="text-[#1e2330] font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center">
@@ -334,7 +331,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#780016] min-h-[100vh] flex flex-col pb-[12vw] md:pb-[9vw]">
+      <section className="bg-[#780016] flex flex-col pb-[12vw] md:pb-[9vw]">
         <div className="flex flex-col justify-center items-center mt-20 md:mt-28 mb-10 md:mb-14 px-4 md:px-0">
           <p className="text-[#e9c0e9] font-extrabold text-4xl md:text-6xl text-center">Got questions?</p>
         </div>

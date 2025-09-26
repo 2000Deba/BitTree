@@ -171,7 +171,7 @@ export default function TemplatesPage() {
     }
 
     return (
-        <main className="min-h-screen bg-gradient-to-b from-cyan-100 via-blue-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 pt-[30vw] sm:pt-[16vw] pb-16 sm:pb-20 px-6 md:px-[8vw] ">
+        <main className="min-h-screen bg-gradient-to-b from-cyan-100 via-blue-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 pt-[40vw] sm:pt-[16vw] pb-16 sm:pb-20 px-6 md:px-[8vw] ">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">

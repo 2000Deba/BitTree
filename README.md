@@ -15,7 +15,7 @@ Built with **Next.js, MongoDB, TailwindCSS, and NextAuth**.
 
 ### Responsive Mode(Tablet)
 <div align="center">
-    <img src="./public/responsive-tablet.png" height="600" alt="Tablet Mode"/>
+    <img src="./public/responsive-tablet.png" width="500" alt="Tablet Mode"/>
 </div>
 
 ### Responsive Mode(Mobile)

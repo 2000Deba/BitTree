@@ -32,11 +32,11 @@ export const metadata = {
   authors: [{ name: "Debasish Seal" }],
   creator: "Debasish Seal",
   publisher: "Debasish Seal",
-  metadataBase: new URL("https://bit-tree-zeta.vercel.app"),
+  metadataBase: new URL("https://bittree-deba.vercel.app"),
   openGraph: {
     title: "BitTree | All Your Links in One Place",
     description: "Create your BitTree profile and share multiple links in one place. Organize your digital identity effortlessly.",
-    url: "https://bit-tree-zeta.vercel.app",
+    url: "https://bittree-deba.vercel.app",
     siteName: "BitTree",
     images: [
       {

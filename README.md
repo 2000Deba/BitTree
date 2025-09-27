@@ -27,7 +27,7 @@ Built with **Next.js, MongoDB, TailwindCSS, and NextAuth**.
 
 ## 🔗 Live Demo
 
-👉 [BitTree](https://bit-tree-zeta.vercel.app/)
+👉 [BitTree](https://bittree-deba.vercel.app/)
 
 ---
 
@@ -104,7 +104,7 @@ Vercel will automatically build and deploy your project.
 **👤 Debasish Seal**
 
 - GitHub: [@2000Deba](https://github.com/2000Deba)
-- Live Demo: [BitTree](https://bit-tree-zeta.vercel.app/)
+- Live Demo: [BitTree](https://bittree-deba.vercel.app/)
 
 ---
 

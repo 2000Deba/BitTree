@@ -16,8 +16,47 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "BitTree - Your favorite link sharing site",
-  description: "We brought a revolution in link sharing",
+  title: "BitTree | All Your Links in One Place",
+  description: "BitTree is your personal hub to share multiple links in one place. Create, customize, and manage your digital identity easily.",
+  keywords: [
+    "BitTree",
+    "link sharing",
+    "profile links",
+    "bio link tool",
+    "link in bio",
+    "Next.js",
+    "MongoDB",
+    "TailwindCSS",
+    "NextAuth",
+  ],
+  authors: [{ name: "Debasish Seal" }],
+  creator: "Debasish Seal",
+  publisher: "Debasish Seal",
+  metadataBase: new URL("https://bit-tree-zeta.vercel.app"),
+  openGraph: {
+    title: "BitTree | All Your Links in One Place",
+    description: "Create your BitTree profile and share multiple links in one place. Organize your digital identity effortlessly.",
+    url: "https://bit-tree-zeta.vercel.app",
+    siteName: "BitTree",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "BitTree - Share All Your Links",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BitTree | All Your Links in One Place",
+    description:
+      "BitTree makes link management simple — build your profile and share links seamlessly.",
+    images: ["/og-image.png"],
+    creator: "@ShilDebasish",
+  },
 };
 
 export default function RootLayout({ children }) {

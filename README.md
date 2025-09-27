@@ -13,12 +13,12 @@ Built with **Next.js, MongoDB, TailwindCSS, and NextAuth**.
 ### Profile Page
 <img src="./public/profilepage.jpg" alt="Homepage" width="800" />
 
-### Responsive Mode(Tablet)
+### Responsive Mode(Tablet View)
 <div align="center">
     <img src="./public/responsive-tablet.png" width="500" alt="Tablet Mode"/>
 </div>
 
-### Responsive Mode(Mobile)
+### Responsive Mode(Mobile View)
 <div align="center">
     <img src="./public/responsive-mobile.png" height="400" alt="Mobile Mode"/>
 </div>

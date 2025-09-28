@@ -61,7 +61,7 @@ const GenerateClient = () => {
 
     try {
       let res
-      const isEditing = searchParams.get("handle") // There is an old handle, which means edit mode.
+      const isEditing = Boolean(searchParams.get("handle")) // There is an old handle, which means edit mode.
 
       if (isEditing) {
         // update existing (by email)

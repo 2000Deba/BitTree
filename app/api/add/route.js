@@ -3,7 +3,32 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import dbConnect from "@/lib/mongoose";
 import BitTree from "@/models/BitTree";
 import User from "@/models/User";
-import { unstable_update as updateSession } from "next-auth"; // session refresh
+
+// sanitize handle (same as model)
+function sanitizeHandle(handle) {
+  if (!handle) return handle;
+  return handle
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-zA-Z0-9-_]/g, "");
+}
+
+// sanitize links
+function sanitizeLinks(links = []) {
+  return links
+    .filter(
+      (item) =>
+        item &&
+        typeof item.linktext === "string" &&
+        typeof item.link === "string" &&
+        item.linktext.trim() !== "" &&
+        item.link.trim() !== ""
+    )
+    .map((item) => ({
+      linktext: item.linktext.trim(),
+      link: item.link.trim(),
+    }));
+}
 
 export async function POST(request) {
   await dbConnect();
@@ -22,7 +47,9 @@ export async function POST(request) {
   }
 
   const body = await request.json();
-  const newHandle = (body.handle || session.user.handle || "").toString();
+  const newHandle = sanitizeHandle(
+    (body.handle || session.user.handle || "").toString()
+  );
 
   if (!newHandle) {
     return new Response(
@@ -35,6 +62,9 @@ export async function POST(request) {
       { status: 400 }
     );
   }
+
+  // sanitize links
+  const safeLinks = sanitizeLinks(body.links);
 
   // Check if another user already took this handle
   const duplicate = await BitTree.findOne({
@@ -60,29 +90,26 @@ export async function POST(request) {
   if (existing) {
     // update existing BitTree
     existing.handle = newHandle;
-    existing.links = body.links || existing.links;
-    existing.pic = body.pic || existing.pic;
-    existing.desc = body.desc || existing.desc;
+    existing.links = safeLinks;
+    existing.pic = body.pic?.trim() || existing.pic;
+    existing.desc = body.desc?.trim() || existing.desc;
     existing.template = body.template || existing.template;
     await existing.save();
     doc = existing;
   } else {
     // create new BitTree
     doc = await BitTree.create({
-      links: body.links || [],
+      links: safeLinks,
       handle: newHandle,
-      pic: body.pic || "",
-      desc: body.desc || "",
+      pic: body.pic?.trim() || "",
+      desc: body.desc?.trim() || "",
       template: body.template || "",
       ownerEmail: session.user.email,
-      ownerId:
-        session.user.id ||
-        session.user.sub ||
-        session.user.email,
+      ownerId: session.user.id || session.user.sub || session.user.email,
     });
   }
 
-  // update User.handle + refresh session
+  // update User.handle (DB only, no session refresh)
   try {
     await User.findOneAndUpdate(
       { email: session.user.email },
@@ -90,13 +117,6 @@ export async function POST(request) {
       { new: true }
     );
 
-    // refresh session with new handle
-    await updateSession({
-      user: {
-        ...session.user,
-        handle: newHandle,
-      },
-    });
   } catch (e) {
     console.error("Failed to update user.handle:", e);
   }

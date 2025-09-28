@@ -207,18 +207,18 @@ export default function Home() {
               "/selena-gomez.jpeg",
               "/becky-g.webp",
               "/inna.jpg",
-              "/nayer-regalado.png",
+              "/Nayer-Regalado.jpg",
               "/jay-sean.jpg",
               "/pitbull.jpg",
-              "/melissa-new.jpg",
+              "/melissa-5.jpg",
             ].concat([
               "/selena-gomez.jpeg",
               "/becky-g.webp",
               "/inna.jpg",
-              "/nayer-regalado.png",
+              "/Nayer-Regalado.jpg",
               "/jay-sean.jpg",
               "/pitbull.jpg",
-              "/melissa-new.jpg",
+              "/melissa-5.jpg",
             ]).map((src, index) => (
               <img key={index} className="rounded-3xl h-80 w-72 flex-shrink-0" src={src} alt="homepage image" />
             ))}

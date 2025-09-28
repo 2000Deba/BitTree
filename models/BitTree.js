@@ -8,6 +8,15 @@ function sanitizeHandle(handle) {
     .replace(/[^a-zA-Z0-9-_]/g, ""); // only a-z, A-Z, 0-9, underscore, dash
 }
 
+// Subdocument schema for links
+const LinkSchema = new mongoose.Schema(
+  {
+    linktext: { type: String, required: true },
+    link: { type: String, required: true },
+  },
+  { _id: true } // force auto _id generation for each link
+);
+
 const BitTreeSchema = new mongoose.Schema(
   {
     handle: {
@@ -16,12 +25,7 @@ const BitTreeSchema = new mongoose.Schema(
       sparse: true, // allow null for users without handle yet
       trim: true,
     },
-    links: [
-      {
-        linktext: { type: String },
-        link: { type: String },
-      },
-    ],
+    links: [LinkSchema], // use subdocument schema
     template: { type: String, default: "" },
     pic: { type: String, default: "" },
     desc: { type: String, default: "" },

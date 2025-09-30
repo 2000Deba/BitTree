@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { Eye, EyeOff } from "lucide-react";
 
 export default function RegisterPage() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [show, setShow] = useState(false);
   const router = useRouter()
 
   const handleRegister = async (e) => {
@@ -42,7 +44,10 @@ export default function RegisterPage() {
           <form className="flex flex-col gap-4" onSubmit={handleRegister}>
             <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500 w-full" />
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500 w-full" />
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500 w-full" />
+            <div className="relative">
+              <input type={show ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="px-4 py-2 border rounded-lg focus:outline-pink-500 w-full" />
+              <button type="button" onClick={() => setShow(!show)} className="absolute right-3 top-3 text-gray-500">{show ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+            </div>
             <button type="submit" className="bg-slate-900 text-white py-2 rounded-lg font-semibold hover:bg-slate-700 transition w-full">Register</button>
           </form>
           <p className="text-center mt-4 text-gray-600 text-sm sm:text-base">

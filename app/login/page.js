@@ -3,13 +3,16 @@
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false)
 
   const handleCredentialsLogin = async (e) => {
@@ -47,10 +50,18 @@ export default function LoginPage() {
           <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center md:text-left">Login with Email</h1>
           <form onSubmit={handleCredentialsLogin} className="w-full max-w-sm flex flex-col gap-4">
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="p-3 rounded-md border border-gray-300 focus:outline-pink-500 w-full" required />
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="p-3 rounded-md border border-gray-300 focus:outline-pink-500 w-full" required />
+            <div className="relative">
+              <input type={show ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="p-3 rounded-md border border-gray-300 focus:outline-pink-500 w-full" required />
+              <button type="button" onClick={() => setShow(!show)} className="absolute right-3 top-4 text-gray-500">{show ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+            </div>
             <button type="submit" disabled={loading} className="bg-slate-900 text-white py-2 rounded-md font-semibold hover:bg-slate-700 transition w-full">
               {loading ? "Logging in..." : "Login"}
             </button>
+            <p className="text-center mt-2 text-sm">
+              <Link href="/forgot-password" className="text-pink-600 font-semibold">
+                Forgot password?
+              </Link>
+            </p>
           </form>
         </div>
 

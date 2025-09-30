@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { Eye, EyeOff } from "lucide-react";
 
-export default function ResetPasswordPage() {
+export default function ResetPasswordClient() {
     const searchParams = useSearchParams()
     const router = useRouter()
     const token = searchParams.get("token")

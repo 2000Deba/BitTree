@@ -16,6 +16,10 @@ const GenerateClient = () => {
   const [pic, setPic] = useState("")
   const [desc, setDesc] = useState("")
   const [isLoaded, setIsLoaded] = useState(false) // prevent reset issue
+  const [loading, setLoading] = useState(false) // new state for button loading
+  const [selectedFile, setSelectedFile] = useState(null) // local File object
+  const [previewUrl, setPreviewUrl] = useState("")       // local preview blob URL
+  const [uploadingImage, setUploadingImage] = useState(false) // uploading state
 
   // Initial handle setup
   useEffect(() => {
@@ -38,12 +42,66 @@ const GenerateClient = () => {
 
   const addLink = () => setLinks([...links, { link: "", linktext: "" }])
 
+  // --------- Image selection handler ----------
+  const onFileChange = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    // optional: validate file type & size
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select an image file")
+      return
+    }
+    if (file.size > 5 * 1024 * 1024) { // 5MB limit example
+      toast.error("Please choose an image smaller than 5MB")
+      return
+    }
+
+    setSelectedFile(file)
+    // show local preview immediately
+    setPreviewUrl(URL.createObjectURL(file))
+
+    // auto-upload selected image to server
+    await uploadImage(file)
+  }
+
+  // --------- Upload image to server endpoint /api/upload ----------
+  const uploadImage = async (file) => {
+    try {
+      setUploadingImage(true)
+      const formData = new FormData()
+      formData.append("file", file)
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+      const data = await res.json()
+
+      if (res.ok && data.url) {
+        // set pic to cloud url — this will be used when creating bittree
+        setPic(data.url)
+        toast.success("Image uploaded")
+      } else {
+        console.error("Upload failed:", data)
+        toast.error(data.error || "Upload failed")
+      }
+    } catch (err) {
+      console.error("Upload error:", err)
+      toast.error("Upload error")
+    } finally {
+      setUploadingImage(false)
+    }
+  }
+
   // Create or Update BitTree
   const submitLinks = async () => {
     if (!session) {
       toast.error("You must be logged in")
       return
     }
+
+    setLoading(true) // start loading
 
     // sanitize handle before saving
     const cleanHandle = handle
@@ -90,6 +148,8 @@ const GenerateClient = () => {
       }
     } catch (err) {
       toast.error("Network error")
+    } finally {
+      setLoading(false) // stop loading
     }
   }
 
@@ -127,11 +187,9 @@ const GenerateClient = () => {
       <ToastContainer />
 
       <div className="bg-[#e6c0e8] min-h-screen grid grid-cols-1 md:grid-cols-2 pt-40 px-4 md:px-0">
-
         {/* Left side - Form */}
         <div className="flex flex-col justify-start items-start md:items-center text-gray-900 w-full md:ml-[8vw]">
           <div className="flex flex-col gap-6 w-full max-w-lg md:my-8">
-
             <h1 className="font-bold text-3xl md:text-4xl text-center md:text-left">Create your BitTree</h1>
 
             {/* Step 1 */}
@@ -164,13 +222,45 @@ const GenerateClient = () => {
               <button onClick={addLink} className="bg-slate-900 text-white font-bold px-6 py-2 rounded-lg mt-2 hover:bg-slate-700 transition w-full sm:w-auto">+ Add Link</button>
             </div>
 
-            {/* Step 3 */}
+            {/* Step 3 - Picture + Description (updated) */}
             <div className="item w-full">
               <h2 className="font-semibold text-xl md:text-2xl mb-2">Step 3: Add Picture and Description</h2>
               <div className="flex flex-col gap-2">
-                <input value={pic || ""} onChange={(e) => setPic(e.target.value)} className="bg-white px-4 py-2 rounded-lg w-full focus:outline-pink-500" type="text" placeholder="Enter link to your Picture" />
+                {/* allow both: user can paste an external image URL OR upload from device */}
+                <input value={pic || ""} onChange={(e) => setPic(e.target.value)} className="bg-white px-4 py-2 rounded-lg w-full focus:outline-pink-500" type="text" placeholder="Enter link to your Picture (or upload below)" />
+
+                {/* File input for device upload */}
+                <div className="flex items-center gap-3">
+                  <input id="file-upload" type="file" accept="image/*" onChange={onFileChange} className="hidden" />
+                  <label htmlFor="file-upload" className="bg-white border px-3 py-2 rounded-md cursor-pointer">{uploadingImage ? "Uploading..." : "Upload from device"}</label>
+
+                  {/* show small status */}
+                  {uploadingImage && <span className="text-sm text-gray-600">Uploading image...</span>}
+                  {!uploadingImage && previewUrl && (
+                    <button type="button" onClick={() => {
+                      // clear selected preview & uploaded pic
+                      setPreviewUrl("")
+                      setSelectedFile(null)
+                      setPic("")
+                    }} className="text-sm text-red-600">
+                      Remove
+                    </button>
+                  )}
+                </div>
+
+                {/* preview (either previewUrl for local file OR pic for remote url) */}
+                <div className="mt-2">
+                  {previewUrl ? (
+                    <img src={previewUrl} alt="preview" className="w-28 h-28 object-cover rounded-md" />
+                  ) : pic ? (
+                    <img src={pic} alt="profile" className="w-28 h-28 object-cover rounded-md" />
+                  ) : null}
+                </div>
+
                 <input value={desc || ""} onChange={(e) => setDesc(e.target.value)} className="bg-white px-4 py-2 rounded-lg w-full focus:outline-pink-500" type="text" placeholder="Enter Description" />
-                <button disabled={pic === "" || desc === "" || handle === "" || links[0].linktext === ""} onClick={submitLinks} className="disabled:bg-gray-500 bg-slate-900 text-white font-bold px-6 py-2 rounded-lg w-full mt-4 hover:bg-slate-700 transition"> {searchParams.get("handle") ? "Update BitTree" : "Create your BitTree"}</button>
+
+                {/* Updated Save/Create button: disabled when uploadingImage OR loading */}
+                <button disabled={loading || uploadingImage || pic === "" || desc === "" || handle === "" || links[0].linktext === ""} onClick={submitLinks} className={`font-bold px-6 py-2 rounded-lg w-full mt-4 transition ${loading || uploadingImage || pic === "" || desc === "" || handle === "" || links[0].linktext === "" ? "bg-gray-500 cursor-not-allowed" : "bg-slate-900 hover:bg-slate-700 text-white"}`}>{loading ? "Saving..." : searchParams.get("handle") ? "Update BitTree" : "Create your BitTree"}</button>
               </div>
             </div>
 

@@ -79,6 +79,9 @@ Built with **Next.js, MongoDB, TailwindCSS, and NextAuth**.
     GOOGLE_CLIENT_SECRET=your_google_client_secret
     GITHUB_ID=your_github_client_id
     GITHUB_SECRET=your_github_client_secret
+    CLOUDINARY_CLOUD_NAME=your_cloud_name_here
+    CLOUDINARY_API_KEY=your_api_key_here
+    CLOUDINARY_API_SECRET=your_api_secret_here
     EMAIL_USER=yourgmail@gmail.com
     EMAIL_PASS=xxxx xxxx xxxx xxxx   # App Password (must be entered without spaces)
     ```

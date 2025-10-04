@@ -46,7 +46,7 @@ export default function LoginPage() {
       <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-32">
 
         {/* Left side - Credentials */}
-        <div className="flex flex-col justify-center items-center bg-gray-100 p-6 md:p-10">
+        <div className="flex flex-col justify-center items-center bg-rose-200 p-6 md:p-10">
           <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center md:text-left">Login with Email</h1>
           <form onSubmit={handleCredentialsLogin} className="w-full max-w-sm flex flex-col gap-4">
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="p-3 rounded-md border border-gray-300 focus:outline-pink-500 w-full" required />
@@ -54,7 +54,7 @@ export default function LoginPage() {
               <input type={show ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="p-3 rounded-md border border-gray-300 focus:outline-pink-500 w-full" required />
               <button type="button" onClick={() => setShow(!show)} className="absolute right-3 top-4 text-gray-500">{show ? <EyeOff size={18} /> : <Eye size={18} />}</button>
             </div>
-            <button type="submit" disabled={loading} className="bg-slate-900 text-white py-2 rounded-md font-semibold hover:bg-slate-700 transition w-full">
+            <button type="submit" disabled={loading} className="bg-pink-800 text-white py-2 rounded-md font-semibold hover:bg-pink-700 transition w-full disabled:opacity-70 disabled:cursor-not-allowed">
               {loading ? "Logging in..." : "Login"}
             </button>
             <p className="text-center mt-2 text-sm">

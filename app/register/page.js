@@ -85,9 +85,15 @@ export default function RegisterPage() {
 
             {/* Password Strength Indicator */}
             {strength && (
-              <p className={`text-sm font-medium ${getStrengthColor()}`}>
-                Password strength: {strength}
-              </p>
+              <div className="mt-2">
+                <p className={`text-sm font-medium ${getStrengthColor()}`}>
+                  Password strength: {strength}
+                </p>
+
+                <div className="h-1 w-full bg-gray-200 rounded mt-1">
+                  <div className={`h-1 rounded transition-all duration-300 ${strength === "Weak" ? "bg-red-600 w-1/3" : strength === "Medium" ? "bg-yellow-800 w-2/3" : "bg-green-600 w-full"}`}></div>
+                </div>
+              </div>
             )}
 
             <button type="submit" disabled={loading} className={`py-2 rounded-lg font-semibold transition w-full text-white ${loading ? "bg-pink-500 cursor-not-allowed" : "bg-pink-800 hover:bg-pink-700"}`}>{loading ? "Registering..." : "Register"}</button>

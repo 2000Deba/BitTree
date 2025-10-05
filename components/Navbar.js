@@ -83,7 +83,7 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <ul className="hidden lg:flex gap-10 items-center text-gray-700 font-medium">
             <Link href="/templates"><li className="hover:text-pink-600 transition">Templates</li></Link>
-            <Link href="/"><li className="hover:text-pink-600 transition">Marketplace</li></Link>
+            <Link href="/marketplace"><li className="hover:text-pink-600 transition">Marketplace</li></Link>
             <Link href="/"><li className="hover:text-pink-600 transition">Discover</li></Link>
             <Link href="/"><li className="hover:text-pink-600 transition">Pricing</li></Link>
             <Link href="/"><li className="hover:text-pink-600 transition">Learn</li></Link>
@@ -122,7 +122,7 @@ export default function Navbar() {
           <div className={`lg:hidden absolute top-[100%] right-0 w-full bg-white rounded-b-2xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
             <ul className="flex flex-col items-center gap-6 py-6 text-lg font-medium text-gray-700">
               <Link href="/templates"><li className="hover:text-pink-600 transition">Templates</li></Link>
-              <Link href="/"><li className="hover:text-pink-600 transition">Marketplace</li></Link>
+              <Link href="/marketplace"><li className="hover:text-pink-600 transition">Marketplace</li></Link>
               <Link href="/"><li className="hover:text-pink-600 transition">Discover</li></Link>
               <Link href="/"><li className="hover:text-pink-600 transition">Pricing</li></Link>
               <Link href="/"><li className="hover:text-pink-600 transition">Learn</li></Link>

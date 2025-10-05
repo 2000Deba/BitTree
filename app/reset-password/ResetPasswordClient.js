@@ -69,8 +69,13 @@ export default function ResetPasswordClient() {
         }
     }
 
-    // Strength color classes
-    const strengthColor = strength === "Strong" ? "text-green-600" : strength === "Medium" ? "text-yellow-800" : strength === "Weak" && password.length > 0 ? "text-red-600" : "text-gray-500";
+    // Dynamic color for strength text
+    const getStrengthColor = () => {
+        if (strength === "Weak") return "text-red-600"
+        if (strength === "Medium") return "text-yellow-800"
+        if (strength === "Strong") return "text-green-600"
+        return "text-gray-500"
+    }
 
     return (
         <>
@@ -89,10 +94,16 @@ export default function ResetPasswordClient() {
                         </div>
 
                         {/* Password Strength Indicator */}
-                        {password.length > 0 && (
-                            <p className={`text-sm font-medium ${strengthColor}`}>
-                                Strength: {strength}
-                            </p>
+                        {strength && (
+                            <div className="mt-2">
+                                <p className={`text-sm font-medium ${getStrengthColor()}`}>
+                                    Password strength: {strength}
+                                </p>
+
+                                <div className="h-1 w-full bg-gray-200 rounded mt-1">
+                                    <div className={`h-1 rounded transition-all duration-300 ${strength === "Weak" ? "bg-red-600 w-1/3" : strength === "Medium" ? "bg-yellow-800 w-2/3" : "bg-green-600 w-full"}`}></div>
+                                </div>
+                            </div>
                         )}
 
                         {/* Confirm Password */}

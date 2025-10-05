@@ -6,7 +6,7 @@ export default function MarketplaceCard({ app }) {
             <img src={app.image} alt={app.name} className="w-16 h-16 mb-4 rounded-lg object-contain" />
             <h4 className="text-lg font-semibold mb-2">{app.name}</h4>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{app.description}</p>
-            <Link href={"/generate"} className="mt-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-full transition">
+            <Link href={"/login"} className="mt-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-full transition">
                 Add to BitTree
             </Link>
         </div>

@@ -120,11 +120,11 @@ export default function FooterSection() {
                             {/* Social Icons */}
                             <div className="flex gap-3 justify-center sm:justify-end flex-wrap text-white">
                                 <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaInstagram size={25} /></div></Link>
-                                <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaTiktok size={25} /></div></Link>
-                                <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaYoutube size={25} /></div></Link>
+                                <Link href="https://bittree-deba.vercel.app/Debasish-Seal" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-2"><Image height={35} width={35} className="bg-white rounded-full" src="/bittree.png" alt="logo" /></div></Link>
+                                <Link href="https://www.youtube.com/@iMusic008" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaYoutube size={25} /></div></Link>
                                 <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaThreads size={25} /></div></Link>
-                                <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaTwitter size={25} /></div></Link>
-                                <Link href="/"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaFacebook size={25} /></div></Link>
+                                <Link href="https://x.com/shildebasish" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaTwitter size={25} /></div></Link>
+                                <Link href="https://www.facebook.com/debasish.seal.370" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaFacebook size={25} /></div></Link>
                             </div>
                         </div>
                     </div>

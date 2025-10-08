@@ -58,9 +58,12 @@ export default function MarketplacePage() {
             {/* Header */}
             <header className="bg-white dark:bg-gray-900 w-[85vw] absolute right-[7.5vw] py-4 px-8 shadow-md z-50 top-8 rounded-full">
                 <div className="max-w-6xl mx-auto flex justify-between items-center relative py-1">
-                    <h1 className="text-xl sm:text-2xl font-bold">
-                        <Link href={"/"}>BitTree</Link> | <Link href={"/marketplace"}>Marketplace</Link>
-                    </h1>
+                    <div className="flex text-xl sm:text-2xl font-bold">
+                        <Link href="/" className="text-xl sm:text-2xl font-bold flex items-center select-none">
+                            <span>BitTree</span>
+                            <img className="w-7 h-7" src="/bittree.png" alt="logo" />
+                        </Link> | <Link href={"/marketplace"}>Marketplace</Link>
+                    </div>
 
                     {/* Desktop Menu */}
                     <nav className="hidden md:flex gap-6 text-sm">

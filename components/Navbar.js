@@ -11,7 +11,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
-  const showNavbar = ["/", "/generate", "/login", "/register", "/templates"].includes(pathname)
+  const showNavbar = ["/", "/generate", "/login", "/register", "/templates","/discover", "/pricing"].includes(pathname)
   const [visible, setVisible] = useState(true)
   const [lastScroll, setLastScroll] = useState(0)
 
@@ -84,8 +84,8 @@ export default function Navbar() {
           <ul className="hidden lg:flex gap-10 items-center text-gray-700 font-medium">
             <Link href="/templates"><li className="hover:text-pink-600 transition">Templates</li></Link>
             <Link href="/marketplace"><li className="hover:text-pink-600 transition">Marketplace</li></Link>
-            <Link href="/"><li className="hover:text-pink-600 transition">Discover</li></Link>
-            <Link href="/"><li className="hover:text-pink-600 transition">Pricing</li></Link>
+            <Link href="/discover"><li className="hover:text-pink-600 transition">Discover</li></Link>
+            <Link href="/pricing"><li className="hover:text-pink-600 transition">Pricing</li></Link>
             <Link href="/"><li className="hover:text-pink-600 transition">Learn</li></Link>
             {status !== "loading" && session && (
               <>
@@ -123,8 +123,8 @@ export default function Navbar() {
             <ul className="flex flex-col items-center gap-6 py-6 text-lg font-medium text-gray-700">
               <Link href="/templates"><li className="hover:text-pink-600 transition">Templates</li></Link>
               <Link href="/marketplace"><li className="hover:text-pink-600 transition">Marketplace</li></Link>
-              <Link href="/"><li className="hover:text-pink-600 transition">Discover</li></Link>
-              <Link href="/"><li className="hover:text-pink-600 transition">Pricing</li></Link>
+              <Link href="/discover"><li className="hover:text-pink-600 transition">Discover</li></Link>
+              <Link href="/pricing"><li className="hover:text-pink-600 transition">Pricing</li></Link>
               <Link href="/"><li className="hover:text-pink-600 transition">Learn</li></Link>
               {status !== "loading" && session ? (
                 <>

@@ -52,7 +52,7 @@ const PricingPage = () => {
                     Choose the perfect plan for your growth
                 </h3>
                 <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
-                    Whether you&apos;'re just starting or scaling up, BitTree has a plan that fits your needs.
+                    Whether you&apos;re just starting or scaling up, BitTree has a plan that fits your needs.
                 </p>
             </section>
 

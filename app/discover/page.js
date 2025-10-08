@@ -75,7 +75,7 @@ export default function DiscoverPage() {
                     </h1>
                     <p className="mt-4 text-lg text-gray-600 text-center md:text-left">
                         Easily display profile links, social, shop, and campaign links with
-                        BitTree's Link-in-Bio tool — code-free, fast, and mobile-friendly.
+                        BitTree&apos;s Link-in-Bio tool — code-free, fast, and mobile-friendly.
                     </p>
 
                     <div className="mt-6 flex flex-wrap justify-center md:justify-start gap-3">
@@ -203,7 +203,7 @@ export default function DiscoverPage() {
                     Frequently Asked Questions
                 </h3>
                 <Accordion title="How fast does the site load?">
-                    BitTree's Link-in-Bio page is designed mobile-first—with recent
+                    BitTree&apos;s Link-in-Bio page is designed mobile-first—with recent
                     optimizations—and loads quickly.
                 </Accordion>
                 <Accordion title="Can I use my own domain?">

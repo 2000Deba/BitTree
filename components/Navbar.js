@@ -11,9 +11,14 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
-  const showNavbar = ["/", "/generate", "/login", "/register", "/templates","/discover", "/pricing"].includes(pathname)
+  const showNavbar = ["/", "/generate", "/login", "/register", "/templates", "/discover", "/pricing", "/learn"].includes(pathname)
   const [visible, setVisible] = useState(true)
   const [lastScroll, setLastScroll] = useState(0)
+
+  // When the path changes (i.e. goes to a new page), the menu will auto close.
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
 
   useEffect(() => {
     let mounted = true
@@ -47,6 +52,7 @@ export default function Navbar() {
       const data = await res.json()
       if (data?.success && data?.result?.handle) {
         router.push(`/${data.result.handle}`)
+        setIsOpen(false)
       }
     } catch (e) {
       console.error("Failed to fetch handle:", e)
@@ -86,14 +92,16 @@ export default function Navbar() {
             <Link href="/marketplace"><li className="hover:text-pink-600 transition">Marketplace</li></Link>
             <Link href="/discover"><li className="hover:text-pink-600 transition">Discover</li></Link>
             <Link href="/pricing"><li className="hover:text-pink-600 transition">Pricing</li></Link>
-            <Link href="/"><li className="hover:text-pink-600 transition">Learn</li></Link>
+            <Link href="/learn"><li className="hover:text-pink-600 transition">Learn</li></Link>
             {status !== "loading" && session && (
               <>
                 <li>
                   <Link href="/generate" className="hover:text-pink-600 transition">Generate</Link>
                 </li>
                 <li>
-                  <button onClick={handleMyBitTree} className="bg-gray-200 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 transition">My BitTree</button>
+                  <button onClick={handleMyBitTree} className="bg-gray-200 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 transition">
+                    My BitTree
+                  </button>
                 </li>
               </>
             )}
@@ -103,49 +111,80 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             {status === "loading" ? null : !session ? (
               <>
-                <button onClick={() => signIn()} className="hidden sm:block bg-gray-400 px-4 py-2 rounded-lg font-bold hover:bg-gray-500 transition">Log in</button>
+                <button onClick={() => signIn()} className="hidden sm:block bg-gray-400 px-4 py-2 rounded-lg font-bold hover:bg-gray-500 transition">
+                  Log in
+                </button>
                 <Link href="/register">
-                  <button className="hidden sm:block bg-gray-900 text-white px-4 py-2 rounded-full font-bold hover:bg-gray-800 transition">Sign up free</button>
+                  <button className="hidden sm:block bg-gray-900 text-white px-4 py-2 rounded-full font-bold hover:bg-gray-800 transition">
+                    Sign up free
+                  </button>
                 </Link>
               </>
             ) : (
-              <>
-                <button onClick={() => signOut()} className="hidden sm:block bg-gray-400 px-4 py-2 rounded-lg font-bold hover:bg-gray-500 transition">Logout</button>
-              </>
+              <button onClick={() => signOut()} className="hidden sm:block bg-gray-400 px-4 py-2 rounded-lg font-bold hover:bg-gray-500 transition">
+                Logout
+              </button>
             )}
 
             {/* Hamburger */}
-            <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition">{isOpen ? <X size={26} /> : <Menu size={26} />}</button>
+            <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition">
+              {isOpen ? <X size={26} /> : <Menu size={26} />}
+            </button>
           </div>
 
-          {/* Mobile / Tablet Menu */}
-          <div className={`lg:hidden absolute top-[100%] right-0 w-full bg-white rounded-b-2xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
+          {/*  Mobile / Tablet Menu with Smooth Fade */}
+          <div className={`lg:hidden absolute top-[100%] right-0 w-full bg-white rounded-b-2xl shadow-lg overflow-hidden transform transition-all duration-500 ease-in-out ${isOpen ? "opacity-100 translate-y-0 max-h-[500px] pointer-events-auto" : "opacity-0 -translate-y-5 max-h-0 pointer-events-none"}`}>
             <ul className="flex flex-col items-center gap-6 py-6 text-lg font-medium text-gray-700">
-              <Link href="/templates"><li className="hover:text-pink-600 transition">Templates</li></Link>
-              <Link href="/marketplace"><li className="hover:text-pink-600 transition">Marketplace</li></Link>
-              <Link href="/discover"><li className="hover:text-pink-600 transition">Discover</li></Link>
-              <Link href="/pricing"><li className="hover:text-pink-600 transition">Pricing</li></Link>
-              <Link href="/"><li className="hover:text-pink-600 transition">Learn</li></Link>
+              {[
+                { href: "/templates", label: "Templates" },
+                { href: "/marketplace", label: "Marketplace" },
+                { href: "/discover", label: "Discover" },
+                { href: "/pricing", label: "Pricing" },
+                { href: "/learn", label: "Learn" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} onClick={() => setIsOpen(false)} className="hover:text-pink-600 transition">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+
               {status !== "loading" && session ? (
                 <>
                   <li>
-                    <Link href="/generate" className="hover:text-pink-600 transition">Generate</Link>
+                    <Link href="/generate" onClick={() => setIsOpen(false)} className="hover:text-pink-600 transition">
+                      Generate
+                    </Link>
                   </li>
                   <li>
-                    <button onClick={handleMyBitTree} className="bg-gray-200 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 transition">My BitTree</button>
+                    <button onClick={() => {
+                      handleMyBitTree()
+                      setIsOpen(false)
+                    }} className="bg-gray-200 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 transition">
+                      My BitTree
+                    </button>
                   </li>
                   <li>
-                    <button onClick={() => signOut()} className="bg-gray-400 px-4 py-2 rounded-lg font-bold hover:bg-gray-500 transition">Logout</button>
+                    <button onClick={() => signOut()} className="bg-gray-400 px-4 py-2 rounded-lg font-bold hover:bg-gray-500 transition">
+                      Logout
+                    </button>
                   </li>
                 </>
               ) : (
                 <>
                   <li>
-                    <button onClick={() => signIn()} className="bg-gray-400 px-4 py-2 rounded-lg font-bold hover:bg-gray-500 transition">Log in</button>
+                    <button onClick={() => {
+                      signIn()
+                      setIsOpen(false)
+                    }} className="bg-gray-400 px-4 py-2 rounded-lg font-bold hover:bg-gray-500 transition">
+                      Log in
+                    </button>
                   </li>
                   <li>
-                    <Link href="/register">
-                      <button className="bg-gray-900 text-white px-4 py-2 rounded-full font-bold hover:bg-gray-800 transition">Sign up free</button>
+                    <Link href="/register" onClick={() => setIsOpen(false)}>
+                      <button className="bg-gray-900 text-white px-4 py-2 rounded-full font-bold hover:bg-gray-800 transition">
+                        Sign up free
+                      </button>
                     </Link>
                   </li>
                 </>

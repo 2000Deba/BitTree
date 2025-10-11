@@ -1,7 +1,7 @@
 "use client"
 
 import { FaInstagram, FaTiktok, FaYoutube, FaTwitter, FaFacebook } from "react-icons/fa";
-import { FaThreads } from "react-icons/fa6";
+import { FaThreads, FaLinkedin } from "react-icons/fa6";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -119,10 +119,10 @@ export default function FooterSection() {
 
                             {/* Social Icons */}
                             <div className="flex gap-3 justify-center sm:justify-end flex-wrap text-white">
-                                <Link href="#" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaInstagram size={25} /></div></Link>
+                                <Link href="https://www.instagram.com/sildebasish02?igsh=MWN4dmdkZDZvNjYxMg==" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaInstagram size={25} /></div></Link>
                                 <Link href="https://bittree-deba.vercel.app/Debasish-Seal" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-2"><Image height={35} width={35} className="bg-white rounded-full" src="/bittree.png" alt="logo" /></div></Link>
                                 <Link href="https://www.youtube.com/@iMusic008" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaYoutube size={25} /></div></Link>
-                                <Link href="#" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaThreads size={25} /></div></Link>
+                                <Link href="https://in.linkedin.com/in/debasishseal" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaLinkedin size={25} /></div></Link>
                                 <Link href="https://x.com/shildebasish" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaTwitter size={25} /></div></Link>
                                 <Link href="https://www.facebook.com/share/19h1bGQxvK/" rel="noopener noreferrer" target="_blank"><div className="bg-gray-950 hover:bg-[#1e2330] rounded-full p-3"><FaFacebook size={25} /></div></Link>
                             </div>
